@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const SINGLE_USE_TOKENS = !!process.env.SINGLE_USE_TOKENS;
 const TOKEN_EXPIRE = process.env.TOKEN_LIFETIME || '5m';
-const SECRET = process.env.SECRET || 'foobar';
+const SECRET = process.env.SECRET || 'whatever';
 
 const usedTokens = new Set();
 
@@ -45,6 +45,12 @@ users.statics.createFromOauth = function(email) {
 
 };
 
+users.statics.authenticateBearer = function(token){
+  let parsedToken = jwt.verify(token, process.env.SECRET); //could add something here for token verification
+  let query = { _id:parsedToken.id};
+  return this.findOne(query)
+};
+
 users.statics.authenticateBasic = function(auth) {
   let query = {username:auth.username};
   return this.findOne(query)
@@ -53,8 +59,8 @@ users.statics.authenticateBasic = function(auth) {
 };
 
 users.methods.comparePassword = function(password) {
-  return bcrypt.compare( password, this.password )
-    .then( valid => valid ? this : null);
+  return bcrypt.compare( password, this.password )  
+    .then( valid => valid ? this : null)    
 };
 
 users.methods.generateToken = function(type) {
@@ -65,7 +71,7 @@ users.methods.generateToken = function(type) {
     type: type || 'user',
   };
   
-  return jwt.sign(token, SECRET);
+  return jwt.sign(token, SECRET, {expiresIn: 60});
 };
 
 users.methods.generateKey = function() {

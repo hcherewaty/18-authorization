@@ -1,46 +1,40 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name
+## Authorization 
 
-### Author: Student/Group Name
+### Author: Heather Cherewaty
+### Collaborated with:  Brent Woodward, Siobhan Niess, Jacob Anderson, Becca Lee, & Caity Heath
 
 ### Links and Resources
-* [repo](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
+[![Build Status](https://www.travis-ci.com/hcherewaty/18-authorization.svg?branch=master)](https://www.travis-ci.com/hcherewaty/18-authorization)
+
+* [repo](https://github.com/hcherewaty/18-authorization)
+* [travis](https://www.travis-ci.com/hcherewaty/18-authorization)
+* [Heroku] ()
 
 #### Documentation
 * [swagger](http://xyz.com) (API assignments only)
 * [jsdoc](http://xyz.com) (All assignments)
 
 ### Modules
-#### `modulename.js`
-##### Exported Values and Methods
-
-###### `foo(thing) -> string`
-Usage Notes or examples
-
-###### `bar(array) -> array`
-Usage Notes or examples
+#### `index.js`
 
 ### Setup
 #### `.env` requirements
-* `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
+* `PORT` - Defined in ENV.
+* `MONGODB_URI` - Defined in ENV.
 
 #### Running the app
 * `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+* Endpoint: `/f
+  * Returns a user authentication tokens upon signup and signin
   
 #### Tests
-* How do you run tests?
-* What assertions were made?
-* What assertions need to be / should be made?
+* npm test (runs unit tests)
+* npm run lint (runs linter tests)
+* `/signup` signs up a new user and stores in mongodb; also returns a token
+* `/sigin` signs in an exisiting user with a unique token that expires within 60 seconds and can only be used once.
 
 #### UML
-Link to an image of the UML for your application and response to events
+![Whiteboard Image](lab18UML.jpg)

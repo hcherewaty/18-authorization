@@ -23,6 +23,23 @@ app.use(express.urlencoded({extended:true}));
 // Routes
 app.use(authRouter);
 
+/*
+//newmiddleware
+const mw = (words) => {
+  return (req,res,next) => {  //returns the function that it will become based on the value passed.
+  req.words = 'words';
+  next();
+} //WATCH VIDEO!!!!!!
+}
+app.get('/hi', mw ('hello world') => {  //mw to be called, added to stack
+  res.status(200).send(req.words);
+})
+
+app.get('/test', mw('testing 123'), (req,res,next) => { //runs as route gets registered
+  res.status(200).send(req.words);
+})
+*/
+
 // Catchalls
 app.use(notFound);
 app.use(errorHandler);
